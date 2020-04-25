@@ -6,6 +6,7 @@ interface AuthContextData {
   // token: string; // token removido pois não tem necessidae de enviá-lo para renderização de componente
   user: object | null;
   signIn(): Promise<void>;
+  signOut(): void;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -21,9 +22,14 @@ export const AuthProvider: React.FC = ({children}) => {
     // console.log('Response', response);
     setUser(response.user);
   }
+
+  function signOut() {
+    //disparar uma ação para o frontend
+    setUser(null);
+  }
   // !!user == Boolean(user)
   return (
-    <AuthContext.Provider value={{signed: !!user, user, signIn}}>
+    <AuthContext.Provider value={{signed: !!user, user, signIn, signOut}}>
       {children}
     </AuthContext.Provider>
   );
