@@ -4,14 +4,14 @@ import React from 'react';
 import {View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import Routes from './routes';
-import AuthContext from './contexts/auth';
+import {AuthProvider} from './contexts/auth';
 
 const App: React.FC = () => {
   return (
     <NavigationContainer>
-      <AuthContext.Provider value={{signed: true}}>
+      <AuthProvider>
         <Routes />
-      </AuthContext.Provider>
+      </AuthProvider>
     </NavigationContainer>
   );
 };
