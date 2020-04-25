@@ -12,8 +12,9 @@ const styles = StyleSheet.create({
 });
 
 const SignIn: React.FC = () => {
-  const {signed, signIn} = useContext(AuthContext);
+  const {signed, user, signIn} = useContext(AuthContext);
   console.log('Signed?', signed);
+  console.log('User?', user);
 
   async function handleSigIn() {
     // Ex: email e password para autenticação

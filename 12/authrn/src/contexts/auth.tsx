@@ -4,7 +4,7 @@ import * as auth from '../services/auth';
 interface AuthContextData {
   signed: boolean;
   // token: string; // token removido pois não tem necessidae de enviá-lo para renderização de componente
-  user: object;
+  user: object | null;
   signIn(): Promise<void>;
 }
 
@@ -14,12 +14,16 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 // Este não é o valor default, é para servir como tipagem
 
 export const AuthProvider: React.FC = ({children}) => {
+  const [user, setUser] = useState<object | null>(null);
+
   async function signIn() {
     const response = await auth.signIn();
-    console.log('Response', response);
+    // console.log('Response', response);
+    setUser(response.user);
   }
+  // !!user == Boolean(user)
   return (
-    <AuthContext.Provider value={{signed: false, user: {}, signIn}}>
+    <AuthContext.Provider value={{signed: !!user, user, signIn}}>
       {children}
     </AuthContext.Provider>
   );
