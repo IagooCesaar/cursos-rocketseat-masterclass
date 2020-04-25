@@ -9,7 +9,7 @@ import AuthContext from './contexts/auth';
 const App: React.FC = () => {
   return (
     <NavigationContainer>
-      <AuthContext.Provider>
+      <AuthContext.Provider value={{signed: true}}>
         <Routes />
       </AuthContext.Provider>
     </NavigationContainer>
