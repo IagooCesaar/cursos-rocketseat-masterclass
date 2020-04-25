@@ -1,14 +1,19 @@
-import React, {useState, createContext, useEffect} from 'react';
+import React, {useState, createContext, useEffect, useContext} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import api from '../services/api';
 
 import * as auth from '../services/auth';
 
+interface User {
+  name: string;
+  email: string;
+}
+
 interface AuthContextData {
   signed: boolean;
   // token: string; // token removido pois não tem necessidae de enviá-lo para renderização de componente
-  user: object | null;
+  user: User | null;
   loading: boolean;
   signIn(): Promise<void>;
   signOut(): void;
@@ -20,7 +25,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 // Este não é o valor default, é para servir como tipagem
 
 export const AuthProvider: React.FC = ({children}) => {
-  const [user, setUser] = useState<object | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -35,6 +40,7 @@ export const AuthProvider: React.FC = ({children}) => {
       const storageToken = storageData[1][1];
 
       if (storageToken && storageUser) {
+        console.log('Token armazenado');
         api.defaults.headers.authorization = `Bearer ${storageToken}`;
         setUser(JSON.parse(storageUser));
         setLoading(false);
@@ -70,4 +76,8 @@ export const AuthProvider: React.FC = ({children}) => {
     </AuthContext.Provider>
   );
 };
-export default AuthContext;
+
+export default function useAuth() {
+  const context = useContext(AuthContext);
+  return context;
+}

@@ -15,6 +15,6 @@ export function signIn(): Promise<Response> {
           email: 'iagocesar.nogueira@gmail.com',
         },
       });
-    }, 5000);
+    }, 2000);
   });
 }
