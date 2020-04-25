@@ -11,6 +11,7 @@ const Routes: React.FC = () => {
   const {signed, loading} = useContext(AuthContext);
 
   if (loading) {
+    // ver sobre react-native-splash-screen
     return (
       <View
         style={{
