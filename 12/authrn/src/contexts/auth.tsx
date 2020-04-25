@@ -38,13 +38,14 @@ export const AuthProvider: React.FC = ({children}) => {
       ]);
       const storageUser = storageData[0][1];
       const storageToken = storageData[1][1];
+      // console.log('Dados armazenados');
+      // console.log(storageUser, storageToken);
 
       if (storageToken && storageUser) {
-        console.log('Token armazenado');
         api.defaults.headers.authorization = `Bearer ${storageToken}`;
         setUser(JSON.parse(storageUser));
-        setLoading(false);
       }
+      setLoading(false);
     }
     loadStorageDate();
   }, []);
@@ -53,6 +54,7 @@ export const AuthProvider: React.FC = ({children}) => {
     const response = await auth.signIn();
     // console.log('Response', response);
     setUser(response.user);
+    setLoading(false);
 
     api.defaults.headers.authorization = `Bearer ${response.token}`;
 
