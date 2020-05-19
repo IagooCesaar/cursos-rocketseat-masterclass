@@ -1,1 +1,2 @@
+#07 -> TypeScript, o início, de forma prática ==> https://www.youtube.com/watch?v=0mYq5LrQN1s
 #12 -> Autenticação do React Native / ReactJS com Context API & Hooks ==> https://www.youtube.com/watch?v=KISMYYXSIX8
