@@ -10,16 +10,16 @@ export default {
 
   async create(req: Request, res: Response) {
     const emailService = new EmailService();
-    emailService.sendMail(
-      {
+    emailService.sendMail({
+      to: {
         name: "Iago César",
-        email: "iago.nogueira@sicoobcredivass",
+        email: "iagocesar.nogueira@gmail.com",
       },
-      {
+      message: {
         subject: "Cadastro no sistema",
         body: "Você foi cadastrado com sucesso!",
-      }
-    );
+      },
+    });
     res.json({ message: "Verifique sua caixa de entrada" });
   },
 };
